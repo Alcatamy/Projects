@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Título actualizado -->
+  <title>Adrián Alcaide | Proyectos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <!-- h1 actualizado -->
+      <h1>Adrián Alcaide</h1>
+      <p class="subtitle">Desarrollador web & creador de experiencias digitales</p>
+    </div>
+  </header>
+  <main>
+    <section class="projects">
+      <h2>Proyectos Destacados</h2>
+      <div class="project-list">
+        <!-- Proyecto 1 -->
+        <div class="project-card">
+          <a href="https://liga.badminton.es/" target="_blank">
+            <img src="https://liga.badminton.es/images/logo.png" alt="Liga Nacional de Clubes" />
+            <div class="project-info">
+              <h3>Liga Nacional de Clubes</h3>
+              <p>Página web oficial de la Liga Nacional de Clubes de Bádminton.</p>
+            </div>
+          </a>
+        </div>
+        <!-- Proyecto 2 -->
+        <div class="project-card">
+          <a href="https://liga.badminton.es/CALCULO%20L%C3%8DMITE%20DE%20PARTICIPACI%C3%93N%20POR%20PRUEBAS.html" target="_blank">
+            <img src="https://img.icons8.com/color/96/calculator.png" alt="Herramienta Cálculo CPRN" />
+            <div class="project-info">
+              <h3>Cálculo del límite de participación en un CPRN</h3>
+              <p>Herramienta web para el cálculo automático de límites de participación.</p>
+            </div>
+          </a>
+        </div>
+        <!-- Proyecto 3 -->
+        <div class="project-card">
+          <a href="https://liga.badminton.es/mi-app/programacion.html" target="_blank">
+            <img src="https://img.icons8.com/color/96/planner.png" alt="Asistente para programar partidos" />
+            <div class="project-info">
+              <h3>Asistente para programar partidos</h3>
+              <p>App interactiva para la programación eficiente de partidos.</p>
+            </div>
+          </a>
+        </div>
+        <!-- Proyecto 4 (Vídeo) -->
+        <div class="project-card video-card" onclick="openModal('https://drive.google.com/file/d/1vW2qyAJOjy1plY3jzhSJHrFr-_9o-RZG/preview')">
+          <img src="https://img.icons8.com/color/96/3d-arcade.png" alt="Madrid Spain Masters 3D Tour" />
+          <div class="project-info">
+            <h3>Madrid Spain Masters 3D Tour</h3>
+            <p>Vídeo modelado 3D para evento internacional. <span class="preview-link">Ver vídeo</span></p>
+          </div>
+        </div>
+        <!-- Proyecto 5 (Vídeo) -->
+        <div class="project-card video-card" onclick="openModal('https://drive.google.com/file/d/1-CRxtIGeD9fPgNZwruFlpaTMprbyr5RT/preview')">
+          <img src="https://img.icons8.com/color/96/3d-arcade.png" alt="European U15 3D Tour" />
+          <div class="project-info">
+            <h3>European U15 3D Tour</h3>
+            <p>Vídeo modelado 3D para campeonato europeo. <span class="preview-link">Ver vídeo</span></p>
+          </div>
+        </div>
+        <!-- Proyecto 6 (Vídeo) -->
+        <div class="project-card video-card" onclick="openModal('https://drive.google.com/file/d/1yeLDAbxJU_EOd8STY5hEvdHf_4JmEJbH/preview')">
+          <img src="https://img.icons8.com/color/96/3d-arcade.png" alt="European Women's Team Championships 3D Tour" />
+          <div class="project-info">
+            <h3>European Women's Team Championships 3D Tour</h3>
+            <p>Vídeo modelado 3D para campeonato femenino europeo. <span class="preview-link">Ver vídeo</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Modal para vídeos -->
+  <div id="videoModal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <iframe id="videoFrame" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2025 Adrián Alcaide | Portafolio</p>
+  </footer>
+  <script src="scripts.js"></script>
+</body>
+</html>
