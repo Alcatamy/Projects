@@ -1,92 +1,297 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Título actualizado -->
-  <title>Adrián Alcaide | Proyectos</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adrián Alcaide - Proyectos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/heroicons@2.1.3/24/outline/index.js"></script>
+    <style>
+        /* Estilo base */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000; /* Fondo negro */
+            color: #e5e7eb; /* Texto claro por defecto */
+            overflow-x: hidden; /* Evitar scroll horizontal */
+            position: relative; /* Necesario para posicionar elementos */
+        }
+
+        /* Partículas Flotantes (CSS) */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Para que no interfieran con clics */
+            z-index: 0; /* Detrás del contenido */
+        }
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5); /* Blanco semitransparente */
+            border-radius: 50%;
+            width: 4px;
+            height: 4px;
+            opacity: 0;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.7; /* Más visible a mitad de camino */
+            }
+            100% {
+                transform: translateY(-100vh) translateX(10vw); /* Movimiento lento hacia arriba y ligeramente lateral */
+                opacity: 0;
+            }
+        }
+
+        /* Crear múltiples partículas con diferentes delays/posiciones/tamaños */
+        .particle:nth-child(1) { top: 80%; left: 10%; animation-delay: 0s; animation-duration: 12s; width: 3px; height: 3px; }
+        .particle:nth-child(2) { top: 90%; left: 30%; animation-delay: 2s; animation-duration: 15s; }
+        .particle:nth-child(3) { top: 85%; left: 50%; animation-delay: 4s; animation-duration: 10s; width: 5px; height: 5px; }
+        .particle:nth-child(4) { top: 95%; left: 70%; animation-delay: 6s; animation-duration: 18s; }
+        .particle:nth-child(5) { top: 75%; left: 90%; animation-delay: 8s; animation-duration: 13s; width: 3px; height: 3px; }
+        .particle:nth-child(6) { top: 100%; left: 20%; animation-delay: 10s; animation-duration: 16s; }
+        .particle:nth-child(7) { top: 90%; left: 60%; animation-delay: 11s; animation-duration: 11s; width: 4px; height: 4px; }
+        .particle:nth-child(8) { top: 80%; left: 80%; animation-delay: 13s; animation-duration: 14s; width: 5px; height: 5px; }
+
+
+        /* Estilo mejorado para las tarjetas de proyecto */
+        .project-card {
+            background-color: rgba(31, 41, 55, 0.8); /* bg-gray-800 con transparencia */
+            backdrop-filter: blur(10px); /* Efecto cristal */
+            border: 1px solid rgba(75, 85, 99, 0.7); /* border-gray-600 */
+            color: #f3f4f6; /* text-gray-100 */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+            z-index: 10; /* Encima de las partículas */
+            position: relative; /* Para que z-index funcione */
+            display: flex; /* Usar flex para alinear botón abajo */
+            flex-direction: column; /* Dirección vertical */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 1.5rem; /* p-6 */
+        }
+        .project-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(0, 191, 255, 0.3), 0 8px 10px -6px rgba(0, 191, 255, 0.2); /* Sombra cian */
+            border-color: #06b6d4; /* border-cyan-500 */
+        }
+
+        /* Contenedor del iframe con altura mínima */
+        .iframe-container {
+            min-height: 350px; /* Altura mínima aumentada */
+            width: 100%;
+            border-radius: 0.5rem; /* Esquinas redondeadas */
+            overflow: hidden; /* Para que el iframe no se salga */
+            position: relative; /* Para el mensaje de carga/error */
+            background-color: rgba(0,0,0,0.2); /* Fondo ligero mientras carga */
+            margin-bottom: 1rem; /* mb-4 */
+            flex-grow: 1; /* Para que ocupe espacio disponible */
+        }
+
+        /* Estilo para iframes */
+        iframe {
+            border: none; /* Sin borde propio del iframe */
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 0.375rem; /* rounded-md */
+        }
+
+        /* Contenedor de imagen de vídeo (enlace) */
+        .video-image-link {
+            display: block; /* Para que ocupe el ancho */
+            border-radius: 0.5rem;
+            overflow: hidden; /* Para redondear imagen */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            min-height: 350px; /* Altura mínima */
+            position: relative; /* Para pseudo-elemento overlay */
+            margin-bottom: 1rem; /* mb-4 */
+            flex-grow: 1; /* Para que ocupe espacio disponible */
+        }
+        .video-image-link:hover {
+            opacity: 0.9;
+            transform: scale(1.03); /* Ligero zoom al pasar el ratón */
+        }
+        .video-image-link::after { /* Overlay sutil para indicar que es clicable */
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .video-image-link:hover::after {
+            opacity: 1;
+        }
+
+        /* Imagen dentro del enlace de vídeo */
+        .video-preview-image {
+            width: 100%;
+            height: 100%; /* Cubre la altura mínima del contenedor */
+            object-fit: cover; /* Cubre el espacio sin deformarse */
+            display: block; /* Evita espacio extra debajo */
+        }
+
+
+        /* Iconos dentro de las tarjetas */
+        .card-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.5rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Título de la tarjeta */
+        .card-title {
+             font-size: 1.25rem; /* text-xl */
+             font-weight: 700; /* font-bold */
+             margin-bottom: 1rem; /* mb-4 */
+             display: flex;
+             align-items: center;
+        }
+
+        /* Botones */
+        .project-button {
+             display: inline-block;
+             font-weight: 700; /* font-bold */
+             padding-top: 0.5rem; /* py-2 */
+             padding-bottom: 0.5rem; /* py-2 */
+             padding-left: 1rem; /* px-4 */
+             padding-right: 1rem; /* px-4 */
+             border-radius: 0.375rem; /* rounded */
+             text-align: center;
+             transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+             color: white; /* text-white */
+             margin-top: auto; /* Empuja el botón al final de la tarjeta flex */
+        }
+        .project-button:hover {
+            transform: translateY(-2px); /* Efecto hover ligero */
+        }
+        .button-blue {
+             background-color: #2563eb; /* bg-blue-600 */
+        }
+        .button-blue:hover {
+             background-color: #1d4ed8; /* hover:bg-blue-700 */
+        }
+
+    </style>
 </head>
-<body>
-  <header>
-    <div class="header-content">
-      <!-- h1 actualizado -->
-      <h1>Adrián Alcaide</h1>
-      <p class="subtitle">Desarrollador web & creador de experiencias digitales</p>
+<body class="bg-black text-gray-100">
+
+    <div class="particle-container">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
-  </header>
-  <main>
-    <section class="projects">
-      <h2>Proyectos Destacados</h2>
-      <div class="project-list">
-        <!-- Proyecto 1 -->
-        <div class="project-card">
-          <a href="https://liga.badminton.es/" target="_blank">
-            <img src="https://liga.badminton.es/images/logo.png" alt="Liga Nacional de Clubes" />
-            <div class="project-info">
-              <h3>Liga Nacional de Clubes</h3>
-              <p>Página web oficial de la Liga Nacional de Clubes de Bádminton.</p>
+
+    <div class="container mx-auto px-4 py-16 relative z-10">
+        <h1 class="text-4xl md:text-6xl font-bold text-white text-center mb-16 drop-shadow-lg">
+            Adrián Alcaide - Proyectos
+        </h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+            <div class="project-card">
+                <h2 class="card-title">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-cyan-400"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg>
+                    Página web Liga Nacional de Clubes
+                </h2>
+                <div class="iframe-container">
+                    <iframe src="https://liga.badminton.es/" title="Preview Liga Nacional de Clubes" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+                <a href="https://liga.badminton.es/" target="_blank" rel="noopener noreferrer" class="project-button button-blue">
+                    Visitar Web
+                </a>
             </div>
-          </a>
-        </div>
-        <!-- Proyecto 2 -->
-        <div class="project-card">
-          <a href="https://liga.badminton.es/CALCULO%20L%C3%8DMITE%20DE%20PARTICIPACI%C3%93N%20POR%20PRUEBAS.html" target="_blank">
-            <img src="https://img.icons8.com/color/96/calculator.png" alt="Herramienta Cálculo CPRN" />
-            <div class="project-info">
-              <h3>Cálculo del límite de participación en un CPRN</h3>
-              <p>Herramienta web para el cálculo automático de límites de participación.</p>
+
+            <div class="project-card">
+                <h2 class="card-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-cyan-400"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" /></svg>
+                    Herramienta: Cálculo Límite Participación
+                </h2>
+                <div class="iframe-container">
+                    <iframe src="https://liga.badminton.es/CALCULO%20L%C3%8DMITE%20DE%20PARTICIPACI%C3%93N%20POR%20PRUEBAS.html" title="Preview Herramienta Cálculo" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+                <a href="https://liga.badminton.es/CALCULO%20L%C3%8DMITE%20DE%20PARTICIPACI%C3%93N%20POR%20PRUEBAS.html" target="_blank" rel="noopener noreferrer" class="project-button button-blue">
+                    Abrir Herramienta
+                </a>
             </div>
-          </a>
-        </div>
-        <!-- Proyecto 3 -->
-        <div class="project-card">
-          <a href="https://liga.badminton.es/mi-app/programacion.html" target="_blank">
-            <img src="https://img.icons8.com/color/96/planner.png" alt="Asistente para programar partidos" />
-            <div class="project-info">
-              <h3>Asistente para programar partidos</h3>
-              <p>App interactiva para la programación eficiente de partidos.</p>
+
+            <div class="project-card">
+                 <h2 class="card-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-cyan-400"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" /></svg>
+                    Asistente para programar partidos
+                </h2>
+                 <div class="iframe-container">
+                    <iframe src="https://liga.badminton.es/mi-app/programacion.html" title="Preview Asistente Programación" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+                <a href="https://liga.badminton.es/mi-app/programacion.html" target="_blank" rel="noopener noreferrer" class="project-button button-blue">
+                    Abrir Asistente
+                </a>
             </div>
-          </a>
-        </div>
-        <!-- Proyecto 4 (Vídeo) -->
-        <div class="project-card video-card" onclick="openModal('https://drive.google.com/file/d/1vW2qyAJOjy1plY3jzhSJHrFr-_9o-RZG/preview')">
-          <img src="https://img.icons8.com/color/96/3d-arcade.png" alt="Madrid Spain Masters 3D Tour" />
-          <div class="project-info">
-            <h3>Madrid Spain Masters 3D Tour</h3>
-            <p>Vídeo modelado 3D para evento internacional. <span class="preview-link">Ver vídeo</span></p>
-          </div>
-        </div>
-        <!-- Proyecto 5 (Vídeo) -->
-        <div class="project-card video-card" onclick="openModal('https://drive.google.com/file/d/1-CRxtIGeD9fPgNZwruFlpaTMprbyr5RT/preview')">
-          <img src="https://img.icons8.com/color/96/3d-arcade.png" alt="European U15 3D Tour" />
-          <div class="project-info">
-            <h3>European U15 3D Tour</h3>
-            <p>Vídeo modelado 3D para campeonato europeo. <span class="preview-link">Ver vídeo</span></p>
-          </div>
-        </div>
-        <!-- Proyecto 6 (Vídeo) -->
-        <div class="project-card video-card" onclick="openModal('https://drive.google.com/file/d/1yeLDAbxJU_EOd8STY5hEvdHf_4JmEJbH/preview')">
-          <img src="https://img.icons8.com/color/96/3d-arcade.png" alt="European Women's Team Championships 3D Tour" />
-          <div class="project-info">
-            <h3>European Women's Team Championships 3D Tour</h3>
-            <p>Vídeo modelado 3D para campeonato femenino europeo. <span class="preview-link">Ver vídeo</span></p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-  <!-- Modal para vídeos -->
-  <div id="videoModal" class="modal" onclick="closeModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <iframe id="videoFrame" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-    </div>
-  </div>
-  <footer>
-    <p>&copy; 2025 Adrián Alcaide | Portafolio</p>
-  </footer>
-  <script src="scripts.js"></script>
+
+            <div class="project-card">
+                <h2 class="card-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-red-400"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9A2.25 2.25 0 0 0 4.5 18.75Z" /></svg>
+                    Madrid Spain Masters 3D Tour
+                </h2>
+                <a href="https://drive.google.com/file/d/1vW2qyAJOjy1plY3jzhSJHrFr-_9o-RZG/view" target="_blank" rel="noopener noreferrer" class="video-image-link" title="Ver vídeo Madrid Spain Masters 3D Tour">
+                    <img src="images/FOP.jpg"
+                         alt="Previsualización Video Madrid Spain Masters 3D Tour"
+                         class="video-preview-image"
+                         loading="lazy"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen';">
+                </a>
+                 </div>
+
+            <div class="project-card">
+                 <h2 class="card-title">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-red-400"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9A2.25 2.25 0 0 0 4.5 18.75Z" /></svg>
+                    European U15 3D Tour
+                </h2>
+                 <a href="https://drive.google.com/file/d/1-CRxtIGeD9fPgNZwruFlpaTMprbyr5RT/view" target="_blank" rel="noopener noreferrer" class="video-image-link" title="Ver vídeo European U15 3D Tour">
+                     <img src="images/Ibiza 2024 - Sa Blanca Dona - Vallas BEC 2025.jpg"
+                         alt="Previsualización Video European U15 3D Tour"
+                         class="video-preview-image"
+                         loading="lazy"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen';">
+                </a>
+            </div>
+
+             <div class="project-card">
+                 <h2 class="card-title">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-red-400"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9A2.25 2.25 0 0 0 4.5 18.75Z" /></svg>
+                    European Women's Team Champs 3D
+                </h2>
+                 <a href="https://drive.google.com/file/d/1yeLDAbxJU_EOd8STY5hEvdHf_4JmEJbH/view" target="_blank" rel="noopener noreferrer" class="video-image-link" title="Ver vídeo European Women's Team Champs 3D">
+                     <img src="images/Pabellón CAR CSD.jpg"
+                         alt="Previsualización Video European Women's Team Champs 3D"
+                         class="video-preview-image"
+                         loading="lazy"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen';">
+                </a>
+            </div>
+
+        </div> </div> <script>
+        console.log("Portfolio v4 cargado con imágenes locales.");
+        // Ya no se necesita inicializar Heroicons si solo usamos SVG inline
+    </script>
+
 </body>
 </html>
