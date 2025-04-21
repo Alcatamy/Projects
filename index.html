@@ -36,9 +36,11 @@
             width: 4px;
             height: 4px;
             opacity: 0;
+            /* Animación asignada a cada partícula */
             animation: float 15s ease-in-out infinite;
         }
 
+        /* Keyframes para la animación de las partículas */
         @keyframes float {
             0% {
                 transform: translateY(0) translateX(0);
@@ -62,6 +64,24 @@
         .particle:nth-child(6) { top: 100%; left: 20%; animation-delay: 10s; animation-duration: 16s; }
         .particle:nth-child(7) { top: 90%; left: 60%; animation-delay: 11s; animation-duration: 11s; width: 4px; height: 4px; }
         .particle:nth-child(8) { top: 80%; left: 80%; animation-delay: 13s; animation-duration: 14s; width: 5px; height: 5px; }
+
+        /* Keyframes para la animación del título */
+        @keyframes titlePulse {
+            0%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.3); /* Subtle white glow */
+            }
+            50% {
+                opacity: 0.9;
+                text-shadow: 0 0 12px rgba(0, 191, 255, 0.4); /* Subtle cyan glow */
+            }
+        }
+
+        /* Aplicar animación al título principal */
+        .main-title {
+            /* Se eliminó drop-shadow-lg para evitar conflictos con text-shadow */
+            animation: titlePulse 5s ease-in-out infinite;
+        }
 
 
         /* Estilo mejorado para las tarjetas de proyecto */
@@ -201,7 +221,7 @@
     </div>
 
     <div class="container mx-auto px-4 py-16 relative z-10">
-        <h1 class="text-4xl md:text-6xl font-bold text-white text-center mb-16 drop-shadow-lg">
+        <h1 class="main-title text-4xl md:text-6xl font-bold text-white text-center mb-16">
             Adrián Alcaide - Proyectos
         </h1>
 
@@ -289,7 +309,7 @@
             </div>
 
         </div> </div> <script>
-        console.log("Portfolio v5 cargado con rutas de imagen corregidas.");
+        console.log("Portfolio v6 cargado con animación de título.");
         // Ya no se necesita inicializar Heroicons si solo usamos SVG inline
     </script>
 
