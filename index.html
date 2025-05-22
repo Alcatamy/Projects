@@ -64,18 +64,18 @@
         /* --- ANIMACIÓN TÍTULO (BRILLO SUTIL) --- */
         /* ----------------------------------------- */
         @keyframes subtleGlowPulse {
-             from {
+              from {
                 text-shadow:
                   0 0 6px rgba(255, 255, 255, 0.5),
                   0 0 12px rgba(34, 211, 238, 0.3);
                 opacity: 0.95;
-             }
-             to {
+              }
+              to {
                 text-shadow:
                   0 0 8px rgba(255, 255, 255, 0.7),
                   0 0 16px rgba(34, 211, 238, 0.4);
                 opacity: 1;
-             }
+              }
         }
 
         .main-title {
@@ -172,59 +172,32 @@
 
         /* Título de la tarjeta */
         .card-title {
-             font-size: 1.25rem;
-             font-weight: 700;
-             margin-bottom: 1rem;
-             display: flex;
-             align-items: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
         }
 
         /* Botones */
         .project-button {
-             display: inline-block;
-             font-weight: 700;
-             padding: 0.5rem 1rem;
-             border-radius: 0.375rem;
-             text-align: center;
-             transition: background-color 0.3s ease-in-out, transform 0.2s ease;
-             color: white;
-             margin-top: auto;
+            display: inline-block;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            text-align: center;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+            color: white;
+            margin-top: auto; /* Empuja el botón hacia abajo */
         }
         .project-button:hover {
             transform: translateY(-2px);
         }
         .button-blue {
-             background-color: #2563eb;
+            background-color: #2563eb;
         }
         .button-blue:hover {
-             background-color: #1d4ed8;
-        }
-
-        /* ------------------------------------------------ */
-        /* --- ESTILOS PARA CHISPAS DIFUMINADAS (SUAVE) --- */
-        /* ------------------------------------------------ */
-        .sparkle {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background-color: transparent;
-            border-radius: 50%;
-            /* Brillo más suave: menos opacidad (0.6) y menos spread (2px) */
-            box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.6);
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 1;
-            transform: translate(-50%, -50%);
-            animation: sparkle-fade 0.6s ease-out forwards;
-        }
-
-        @keyframes sparkle-fade {
-             to {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.3);
-                /* Ajusta también la sombra al desaparecer */
-                box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.3);
-            }
+            background-color: #1d4ed8;
         }
 
     </style>
@@ -251,7 +224,7 @@
 
             <div class="project-card">
                 <h2 class="card-title">
-                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-cyan-400"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-cyan-400"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg>
                     Página web Liga Nacional de Clubes
                 </h2>
                 <div class="iframe-container">
@@ -300,15 +273,15 @@
                          loading="lazy"
                          onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen';">
                 </a>
-            </div>
+                </div>
 
             <div class="project-card">
                  <h2 class="card-title">
-                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-red-400"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9A2.25 2.25 0 0 0 4.5 18.75Z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-red-400"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9A2.25 2.25 0 0 0 4.5 18.75Z" /></svg>
                     European U15 3D Tour
                 </h2>
                  <a href="https://drive.google.com/file/d/1-CRxtIGeD9fPgNZwruFlpaTMprbyr5RT/view" target="_blank" rel="noopener noreferrer" class="video-image-link" title="Ver vídeo European U15 3D Tour">
-                     <img src="Images/Ibiza 2024 - Sa Blanca Dona - Vallas BEC 2025.jpg"
+                    <img src="Images/Ibiza 2024 - Sa Blanca Dona - Vallas BEC 2025.jpg"
                          alt="Previsualización Video European U15 3D Tour"
                          class="video-preview-image"
                          loading="lazy"
@@ -316,13 +289,13 @@
                 </a>
             </div>
 
-             <div class="project-card">
+            <div class="project-card">
                  <h2 class="card-title">
-                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-red-400"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9A2.25 2.25 0 0 0 4.5 18.75Z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-red-400"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9A2.25 2.25 0 0 0 4.5 18.75Z" /></svg>
                     European Women's Team Champs 3D
                 </h2>
                  <a href="https://drive.google.com/file/d/1yeLDAbxJU_EOd8STY5hEvdHf_4JmEJbH/view" target="_blank" rel="noopener noreferrer" class="video-image-link" title="Ver vídeo European Women's Team Champs 3D">
-                     <img src="Images/Pabellón CAR CSD.jpg"
+                    <img src="Images/Pabellón CAR CSD.jpg"
                          alt="Previsualización Video European Women's Team Champs 3D"
                          class="video-preview-image"
                          loading="lazy"
@@ -330,47 +303,25 @@
                 </a>
             </div>
 
-        </div> </div> <script>
-        const containerForSparkles = document.body;
+            <div class="project-card">
+                <h2 class="card-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="card-icon text-yellow-400"> <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                    </svg>
+                    Final - División de Honor 2025
+                </h2>
+                <a href="https://liga.badminton.es/3D/" target="_blank" rel="noopener noreferrer" class="video-image-link" title="Ver modelo 3D Final - División de Honor 2025">
+                    <img src="Images/Wsell Guimbarda - DH Final 2.jpg" alt="Previsualización Modelo 3D Final - División de Honor 2025"
+                         class="video-preview-image"
+                         loading="lazy"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen+Wsell';">
+                </a>
+                </div>
 
-        // Función para crear múltiples chispas difuminadas
-        function createSparkle(x, y) {
-            const sparkleCount = 3; // Número de chispas
+        </div>
+    </div>
 
-            for (let i = 0; i < sparkleCount; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.classList.add('sparkle');
-
-                // Desplazamiento aleatorio
-                const offsetX = (Math.random() - 0.5) * 30;
-                const offsetY = (Math.random() - 0.5) * 30;
-
-                sparkle.style.left = `${x + offsetX}px`;
-                sparkle.style.top = `${y + offsetY}px`;
-
-                containerForSparkles.appendChild(sparkle);
-
-                // Elimina la chispa después de la animación (0.6s)
-                setTimeout(() => {
-                    sparkle.remove();
-                }, 600);
-            }
-        }
-
-        // Throttling para controlar la frecuencia
-        let canCreateSparkle = true;
-        containerForSparkles.addEventListener('mousemove', (event) => {
-            if (canCreateSparkle) {
-                createSparkle(event.clientX, event.clientY);
-                canCreateSparkle = false;
-                // Aumentamos el tiempo de espera a 75ms para reducir frecuencia
-                setTimeout(() => {
-                    canCreateSparkle = true;
-                }, 75); // <-- Ajuste aquí (antes 50ms)
-            }
-        });
-
-        console.log("Portfolio v12 cargado con efecto aspersor de chispas suave.");
+    <script>
+        console.log("Portfolio v13 cargado - efecto de chispas del ratón eliminado.");
     </script>
 
 </body>
