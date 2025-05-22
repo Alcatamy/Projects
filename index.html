@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/heroicons@2.1.3/24/outline/index.js"></script>
     <style>
         /* ------------------------- */
         /* --- ESTILOS GENERALES --- */
@@ -31,8 +30,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 0;
+            pointer-events: none; /* Las partículas no deben interferir con los clics */
+            z-index: 0; /* Detrás de todo el contenido */
         }
         .particle {
             position: absolute;
@@ -40,23 +39,23 @@
             border-radius: 50%;
             width: 4px;
             height: 4px;
-            opacity: 0;
+            opacity: 0; /* Comienzan invisibles */
             animation: float 15s ease-in-out infinite;
         }
 
         @keyframes float {
             0% { transform: translateY(0) translateX(0); opacity: 0; }
-            50% { opacity: 0.7; }
-            100% { transform: translateY(-100vh) translateX(10vw); opacity: 0; }
+            50% { opacity: 0.7; } /* Se hacen visibles a mitad de la animación */
+            100% { transform: translateY(-100vh) translateX(10vw); opacity: 0; } /* Desaparecen al llegar arriba */
         }
 
-        /* Definición de las partículas */
+        /* Definición individual de las partículas para variedad */
         .particle:nth-child(1) { top: 80%; left: 10%; animation-delay: 0s; animation-duration: 12s; width: 3px; height: 3px; }
         .particle:nth-child(2) { top: 90%; left: 30%; animation-delay: 2s; animation-duration: 15s; }
         .particle:nth-child(3) { top: 85%; left: 50%; animation-delay: 4s; animation-duration: 10s; width: 5px; height: 5px; }
         .particle:nth-child(4) { top: 95%; left: 70%; animation-delay: 6s; animation-duration: 18s; }
         .particle:nth-child(5) { top: 75%; left: 90%; animation-delay: 8s; animation-duration: 13s; width: 3px; height: 3px; }
-        .particle:nth-child(6) { top: 100%; left: 20%; animation-delay: 10s; animation-duration: 16s; }
+        .particle:nth-child(6) { top: 100%; left: 20%; animation-delay: 10s; animation-duration: 16s; } /* Empieza desde abajo */
         .particle:nth-child(7) { top: 90%; left: 60%; animation-delay: 11s; animation-duration: 11s; width: 4px; height: 4px; }
         .particle:nth-child(8) { top: 80%; left: 80%; animation-delay: 13s; animation-duration: 14s; width: 5px; height: 5px; }
 
@@ -66,8 +65,8 @@
         @keyframes subtleGlowPulse {
               from {
                 text-shadow:
-                  0 0 6px rgba(255, 255, 255, 0.5),
-                  0 0 12px rgba(34, 211, 238, 0.3);
+                  0 0 6px rgba(255, 255, 255, 0.5), /* Sombra blanca suave */
+                  0 0 12px rgba(34, 211, 238, 0.3); /* Sombra cyan más difusa */
                 opacity: 0.95;
               }
               to {
@@ -80,72 +79,72 @@
 
         .main-title {
             color: white;
-            animation: subtleGlowPulse 4s ease-in-out infinite alternate;
+            animation: subtleGlowPulse 4s ease-in-out infinite alternate; /* Animación de brillo pulsante */
         }
 
         /* ---------------------------------- */
         /* --- ESTILOS TARJETAS PROYECTO --- */
         /* ---------------------------------- */
         .project-card {
-            background-color: rgba(31, 41, 55, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(75, 85, 99, 0.7);
-            color: #f3f4f6;
+            background-color: rgba(31, 41, 55, 0.8); /* Fondo semi-transparente oscuro */
+            backdrop-filter: blur(10px); /* Efecto de desenfoque para el fondo */
+            border: 1px solid rgba(75, 85, 99, 0.7); /* Borde sutil */
+            color: #f3f4f6; /* Color de texto claro */
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
-            z-index: 10;
+            z-index: 10; /* Asegura que las tarjetas estén sobre las partículas */
             position: relative;
             display: flex;
-            flex-direction: column;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
+            flex-direction: column; /* Para alinear el botón abajo */
+            border-radius: 0.5rem; /* Esquinas redondeadas */
+            padding: 1.5rem; /* Espaciado interno */
         }
         .project-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 25px -5px rgba(0, 191, 255, 0.3), 0 8px 10px -6px rgba(0, 191, 255, 0.2);
-            border-color: #06b6d4;
+            transform: translateY(-5px) scale(1.02); /* Efecto de elevación y zoom ligero */
+            box-shadow: 0 10px 25px -5px rgba(0, 191, 255, 0.3), 0 8px 10px -6px rgba(0, 191, 255, 0.2); /* Sombra cian al pasar el ratón */
+            border-color: #06b6d4; /* Color del borde cian al pasar el ratón */
         }
 
-        /* Contenedor del iframe */
+        /* Contenedor del iframe para previsualizaciones */
         .iframe-container {
-            min-height: 350px;
+            min-height: 350px; /* Altura mínima para el contenido del iframe */
             width: 100%;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            position: relative;
-            background-color: rgba(0,0,0,0.2);
-            margin-bottom: 1rem;
-            flex-grow: 1;
+            border-radius: 0.5rem; /* Esquinas redondeadas */
+            overflow: hidden; /* Para que el iframe no se salga del borde redondeado */
+            position: relative; /* Para posicionar el iframe absolutamente dentro */
+            background-color: rgba(0,0,0,0.2); /* Fondo oscuro ligero si el iframe tarda en cargar */
+            margin-bottom: 1rem; /* Espacio antes del botón */
+            flex-grow: 1; /* Permite que este contenedor crezca si hay espacio */
         }
         iframe {
-            border: none;
+            border: none; /* Sin borde para el iframe */
             width: 100%;
             height: 100%;
             position: absolute;
             top: 0;
             left: 0;
-            border-radius: 0.375rem;
+            border-radius: 0.375rem; /* Esquinas ligeramente redondeadas para el contenido del iframe */
         }
 
-        /* Contenedor de imagen de vídeo (enlace) */
+        /* Contenedor de imagen de vídeo (usado como enlace) */
         .video-image-link {
-            display: block;
+            display: block; /* Para que el enlace ocupe todo el espacio de la imagen */
             border-radius: 0.5rem;
             overflow: hidden;
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-            min-height: 350px;
+            min-height: 350px; /* Similar al iframe-container */
             position: relative;
-            margin-bottom: 1rem;
+            margin-bottom: 1rem; /* Espacio antes del posible botón (si lo hubiera) o final de tarjeta */
             flex-grow: 1;
         }
         .video-image-link:hover {
-            opacity: 0.9;
-            transform: scale(1.03);
+            opacity: 0.9; /* Ligera transparencia al pasar el ratón */
+            transform: scale(1.03); /* Zoom ligero */
         }
-        .video-image-link::after {
+        .video-image-link::after { /* Capa superpuesta para efecto hover */
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.1); /* Ligero oscurecimiento */
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
         }
@@ -157,54 +156,54 @@
         .video-preview-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Asegura que la imagen cubra el contenedor manteniendo la relación de aspecto */
             display: block;
         }
 
-        /* Iconos dentro de las tarjetas */
+        /* Iconos SVG dentro de las tarjetas */
         .card-icon {
-            width: 1.5rem;
-            height: 1.5rem;
-            margin-right: 0.5rem;
+            width: 1.5rem; /* 24px */
+            height: 1.5rem; /* 24px */
+            margin-right: 0.5rem; /* Espacio a la derecha del icono */
             display: inline-block;
-            vertical-align: middle;
+            vertical-align: middle; /* Alineación vertical con el texto */
         }
 
         /* Título de la tarjeta */
         .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
+            font-size: 1.25rem; /* Tamaño de fuente del título */
+            font-weight: 700; /* Negrita */
+            margin-bottom: 1rem; /* Espacio debajo del título */
+            display: flex; /* Para alinear el icono y el texto */
+            align-items: center; /* Centrado vertical del icono y texto */
         }
 
-        /* Botones */
+        /* Botones de proyecto */
         .project-button {
             display: inline-block;
-            font-weight: 700;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
+            font-weight: 700; /* Negrita */
+            padding: 0.5rem 1rem; /* Relleno interno */
+            border-radius: 0.375rem; /* Esquinas redondeadas */
             text-align: center;
             transition: background-color 0.3s ease-in-out, transform 0.2s ease;
-            color: white;
-            margin-top: auto; /* Empuja el botón hacia abajo */
+            color: white; /* Color de texto del botón */
+            margin-top: auto; /* Empuja el botón hacia abajo si la tarjeta usa flex-direction: column */
         }
         .project-button:hover {
-            transform: translateY(-2px);
+            transform: translateY(-2px); /* Ligero movimiento hacia arriba */
         }
         .button-blue {
-            background-color: #2563eb;
+            background-color: #2563eb; /* Azul Tailwind */
         }
         .button-blue:hover {
-            background-color: #1d4ed8;
+            background-color: #1d4ed8; /* Azul Tailwind más oscuro */
         }
 
     </style>
 </head>
 <body class="bg-black text-gray-100">
 
-    <div class="particle-container">
+    <div class="particle-container" aria-hidden="true">
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
@@ -241,7 +240,7 @@
                     Herramienta: Cálculo Límite Participación
                 </h2>
                 <div class="iframe-container">
-                    <iframe src="https://liga.badminton.es/CALCULO%20L%C3%8DMITE%20DE%20PARTICIPACI%C3%93N%20POR%20PRUEBAS.html" title="Preview Herramienta Cálculo" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                    <iframe src="https://liga.badminton.es/CALCULO%20L%C3%8DMITE%20DE%20PARTICIPACI%C3%93N%20POR%20PRUEBAS.html" title="Preview Herramienta Cálculo Límite de Participación" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
                 </div>
                 <a href="https://liga.badminton.es/CALCULO%20L%C3%8DMITE%20DE%20PARTICIPACI%C3%93N%20POR%20PRUEBAS.html" target="_blank" rel="noopener noreferrer" class="project-button button-blue">
                     Abrir Herramienta
@@ -254,7 +253,7 @@
                     Asistente para programar partidos
                 </h2>
                  <div class="iframe-container">
-                    <iframe src="https://liga.badminton.es/mi-app/programacion.html" title="Preview Asistente Programación" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                    <iframe src="https://liga.badminton.es/mi-app/programacion.html" title="Preview Asistente para programar partidos" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
                 </div>
                 <a href="https://liga.badminton.es/mi-app/programacion.html" target="_blank" rel="noopener noreferrer" class="project-button button-blue">
                     Abrir Asistente
@@ -271,7 +270,7 @@
                          alt="Previsualización Video Madrid Spain Masters 3D Tour"
                          class="video-preview-image"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen';">
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen+FOP'; this.alt='Error al cargar la imagen de previsualización del tour 3D del Madrid Spain Masters';">
                 </a>
                 </div>
 
@@ -285,7 +284,7 @@
                          alt="Previsualización Video European U15 3D Tour"
                          class="video-preview-image"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen';">
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen+Ibiza'; this.alt='Error al cargar la imagen de previsualización del tour 3D del European U15';">
                 </a>
             </div>
 
@@ -299,7 +298,7 @@
                          alt="Previsualización Video European Women's Team Champs 3D"
                          class="video-preview-image"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen';">
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen+CSD'; this.alt='Error al cargar la imagen de previsualización del tour 3D del European Women Team Champs';">
                 </a>
             </div>
 
@@ -313,15 +312,18 @@
                     <img src="Images/Wsell Guimbarda - DH Final 2.jpg" alt="Previsualización Modelo 3D Final - División de Honor 2025"
                          class="video-preview-image"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen+Wsell';">
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x400/1f2937/ffffff?text=Error+cargando+imagen+Wsell'; this.alt='Error al cargar la imagen de previsualización del modelo 3D de la Final División de Honor 2025';">
                 </a>
-                </div>
+                <!--
+                <a href="https://liga.badminton.es/3D/" target="_blank" rel="noopener noreferrer" class="project-button button-blue" style="margin-top: 1rem;">
+                    Abrir Modelo 3D
+                </a>
+                -->
+            </div>
 
-        </div>
-    </div>
-
-    <script>
-        console.log("Portfolio v13 cargado - efecto de chispas del ratón eliminado.");
+        </div> </div> <script>
+        // Mensaje en consola para confirmar la versión del script y la eliminación del efecto de chispas.
+        console.log("Portfolio v13.1 cargado. Efecto de chispas del ratón eliminado. Se han añadido comentarios y mejoras de accesibilidad en imágenes.");
     </script>
 
 </body>
